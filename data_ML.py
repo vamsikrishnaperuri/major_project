@@ -29,6 +29,7 @@ def get_moodle_grades(moodle_url, token, course_id, user_id=None):
         extracted_data = []
         if data.get('tables'):
             grade_items_by_user = {}
+
             for table in data['tables']:
                 user_id = table.get('userid')
                 user_fullname = table.get('userfullname', '')
@@ -47,20 +48,19 @@ def get_moodle_grades(moodle_url, token, course_id, user_id=None):
                     for row in table['tabledata']:
                         if 'grade' in row and 'itemname' in row:
                             if isinstance(row['grade'], dict) and isinstance(row['itemname'], dict):
-                                grade_content = row['grade'].get('content', '').strip()
                                 itemname_content = row['itemname'].get('content', '').strip()
-
-                                # Extracting numeric grade directly
-                                finalgrade = None
-                                if grade_content.replace('.', '', 1).isdigit():  # Handles float numbers like "90.00"
-                                    finalgrade = float(grade_content)
-
+                                
                                 # Extract item name properly
                                 itemname_match = re.search(r'title="(.*?)"', itemname_content)
                                 itemname = itemname_match.group(1) if itemname_match else None
 
-                                # Exclude "Natural" from results
-                                if finalgrade is not None and itemname is not None and course_shortname is not None and itemname != "Natural":
+                                # Extract numeric grade (handles both plain numbers and wrapped inside <div>)
+                                grade_content = row['grade'].get('content', '').strip()
+                                grade_match = re.search(r'(\d+\.?\d*)', grade_content)  # Extracts first valid number
+                                finalgrade = float(grade_match.group(1)) if grade_match else None
+
+                                # Ensure valid data and exclude "Natural"
+                                if finalgrade is not None and itemname is not None and course_shortname is not None and "Natural" not in itemname:
                                     if user_id not in grade_items_by_user:
                                         grade_items_by_user[user_id] = {
                                             "firstname": firstname,
@@ -73,8 +73,9 @@ def get_moodle_grades(moodle_url, token, course_id, user_id=None):
                                         "finalgrade": finalgrade
                                     })
 
+            # Calculate total final grade for each user
             for user_id, user_data in grade_items_by_user.items():
-                total_finalgrade = sum(g["finalgrade"] for g in user_data["grades"])  # Summing grades
+                total_finalgrade = sum(g["finalgrade"] for g in user_data["grades"])  # Sum up all grades
                 extracted_data.append({
                     "user_id": user_id,
                     "firstname": user_data["firstname"],
@@ -140,8 +141,8 @@ def categorize_students_json(input_json):
 
 # Example usage:
 moodle_url = "http://localhost"
-token = "YOUR_TOKEN"
-course_id = 2
+token = "fb02494ebe9accf818808979db008242"
+course_id = 3
 
 grades = get_moodle_grades(moodle_url, token, course_id)
 
