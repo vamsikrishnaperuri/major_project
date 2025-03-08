@@ -1,0 +1,63 @@
+.student-performance-container {
+    margin: 20px 0;
+    padding: 15px;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.performance-list {
+    margin-top: 15px;
+}
+
+.performance-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    margin: 8px 0;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.performance-good-performance {
+    background-color: #e3f2fd;
+    border-left: 4px solid #2196F3;
+}
+
+.performance-average-performance {
+    background-color: #fff3e0;
+    border-left: 4px solid #FF9800;
+}
+
+.performance-poor-performance {
+    background-color: #ffebee;
+    border-left: 4px solid #f44336;
+}
+
+.student-name {
+    font-weight: 600;
+    color: #333;
+    margin-right: 15px;
+}
+
+.performance-label {
+    padding: 4px 12px;
+    border-radius: 15px;
+    font-size: 0.9em;
+    font-weight: 500;
+}
+
+.last-updated {
+    margin-top: 15px;
+    font-size: 0.9em;
+    color: #666;
+    text-align: right;
+}
+
+.performance-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}

@@ -1,0 +1,18 @@
+{{#has_data}}
+<div class="student-performance-container">
+    <h4>Student Performance Overview</h4>
+    <div class="performance-list">
+        {{#performances}}
+            <div class="performance-item performance-{{performance_class}}">
+                <div class="performance-info">
+                    <span class="student-name">{{fullname}}</span>
+                    <span class="performance-label">{{performance}}</span>
+                </div>
+            </div>
+        {{/performances}}
+    </div>
+    <div class="last-updated">
+        Last updated: {{last_updated}}
+    </div>
+</div>
+{{/has_data}}

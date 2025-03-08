@@ -1,0 +1,15 @@
+import json
+import requests
+
+data = [
+    {"user_id": 3, "course_id": 2, "Performance": "Average Performance"},
+    {"user_id": 4, "course_id": 2, "Performance": "Poor Performance"},
+    {"user_id": 5, "course_id": 2, "Performance": "Good Performance"},
+    {"user_id": 3, "course_id": 3, "Performance": "Good Performance"},
+    {"user_id": 4, "course_id": 3, "Performance": "Poor Performance"},
+    {"user_id": 5, "course_id": 3, "Performance": "Average Performance"}
+]
+
+response = requests.post("http://localhost/moodle/grade/report/userperformance/upload.php", json=data)
+
+print(response.text)  # Should return "Data updated"

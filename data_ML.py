@@ -191,11 +191,11 @@ def categorize_students_json(input_json):
         return []
 
 moodle_url = "http://localhost"
-token = "TOKEN"
+token = "fb02494ebe9accf818808979db008242"
 # course_id = 2
 
 grades = get_all_users_moodle_grades(moodle_url, token)
 
 
 output_json = categorize_students_json(grades)
-# print(json.dumps(output_json, indent=4))
+print(json.dumps(output_json, indent=4))
