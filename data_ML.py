@@ -198,4 +198,4 @@ grades = get_all_users_moodle_grades(moodle_url, token)
 
 
 output_json = categorize_students_json(grades)
-print(json.dumps(output_json, indent=4))
+# print(json.dumps(output_json, indent=4))

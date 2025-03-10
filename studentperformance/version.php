@@ -1,9 +1,8 @@
 <?php
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->component = 'local_studentperformance';
-$plugin->version = 2025030800;
-$plugin->requires = 2022112800; // Moodle 4.5.2 requirement
-$plugin->maturity = MATURITY_STABLE;
-$plugin->release = 'v1.0';
-$plugin->dependencies = array();
+$plugin->version   = 2025031000; // The current plugin version (Date: YYYYMMDDXX)
+$plugin->requires  = 2020110900; // Requires this Moodle version
+$plugin->component = 'local_studentperformance'; // Full name of the plugin (used for diagnostics)
+$plugin->maturity  = MATURITY_STABLE;
+$plugin->release   = 'v1.0';

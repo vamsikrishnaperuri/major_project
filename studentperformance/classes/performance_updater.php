@@ -34,19 +34,26 @@ class performance_updater {
             return false;
         }
 
+        // Log the output for debugging
+        debugging('Python script output: ' . $output, DEBUG_DEVELOPER);
+
         // Validate JSON output
         $data = json_decode($output, true);
         if (json_last_error() !== JSON_ERROR_NONE) {
-            debugging('Invalid JSON output from Python script', DEBUG_DEVELOPER);
+            debugging('Invalid JSON output from Python script: ' . json_last_error_msg(), DEBUG_DEVELOPER);
             return false;
         }
 
         // Save new data
         $success = file_put_contents($this->data_file_path, $output);
-        
+        if ($success === false) {
+            debugging('Failed to write performance data to file', DEBUG_DEVELOPER);
+            return false;
+        }
+
         // Clear cache
         \cache_helper::purge_by_event('local_studentperformance_data_updated');
 
-        return $success !== false;
+        return true;
     }
 }
