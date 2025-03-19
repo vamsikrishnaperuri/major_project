@@ -123,7 +123,7 @@ def get_all_users_moodle_grades(moodle_url, token):
                 if user_data["grades"]:  # Only add if user has grades
                     all_courses_data[course_id]["users"].append(user_data)
 
-        # print(json.dumps(all_courses_data, indent=4))
+        print(json.dumps(all_courses_data, indent=4))
         return all_courses_data
 
     except requests.exceptions.RequestException as e:
