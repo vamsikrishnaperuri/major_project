@@ -2,12 +2,12 @@
     {
         "user_id": 3,
         "course_id": 2,
-        "Performance": "Average Performance"
+        "Performance": "Good Performance"
     },
     {
         "user_id": 4,
         "course_id": 2,
-        "Performance": "Good Performance"
+        "Performance": "Average Performance"
     },
     {
         "user_id": 5,
